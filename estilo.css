@@ -98,7 +98,7 @@ nav > ul > li:hover {
     align-items: center;
     /* Just a slight inset shadow */
     box-shadow: inset 0 10px 30px 10px rgba(0,0,0,.5);
-    text-shadow: 1px 2px 3px rgb(0 0 0);
+    text-shadow: 1px 2px 3px rgb(0,0,0);
 }
 
 #hero-text > h1 {
@@ -115,6 +115,40 @@ nav > ul > li:hover {
     font-size: 1rem;
     font-weight: 500;
     margin: 0;
+}
+
+#hero-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.hero-card {
+    padding: 1rem;
+    max-width: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0.5rem;
+    background-color: #161e2e;
+    /* Some slight shadow just for the bottom */
+    box-shadow: 0 10px 30px 10px rgb(0 0 0 / 50%);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.hero-card:hover {
+    transform: translateY(-2px);
+}
+
+.hero-card:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.hero-card svg {
+    width: 3rem;
+    height: 3rem;
 }
 
 footer {
@@ -151,5 +185,11 @@ footer {
     #hero-text {
         margin-left: 10rem;
         font-size: 20rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    #hero {
+        height: 30rem;
     }
 }
