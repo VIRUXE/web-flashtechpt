@@ -4,6 +4,7 @@
 :root {
 	--background: #1e293b;
 	--blue: #08bcff;
+	--darkBlue: #2084a8;
 }
 
 *:active {
@@ -74,8 +75,8 @@ input:invalid:not(:placeholder-shown) {
 	border-bottom: 1px solid rgba(255, 255, 255, .1);
 }
 
+/* Basically just for the navigation */
 header {
-	/* Basically just for the navigation */
 	padding: 1rem;
 	display: flex;
 	justify-content: space-between;
@@ -202,8 +203,6 @@ nav>ul>li:hover {
 	cursor: default;
 }
 
-
-
 #fileservice img {
 	height: 64px;
 	filter: invert(78%) sepia(42%) saturate(7483%) hue-rotate(162deg) brightness(100%) contrast(103%) drop-shadow(0 0 10px var(--blue));
@@ -212,6 +211,19 @@ nav>ul>li:hover {
 
 #fileservice:hover {
 	cursor: pointer;
+}
+
+#fileservice > div > form > div {
+	margin: 1rem 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	align-items: center;
+	justify-content: center;
+}
+
+#fileservice div > form > div:nth-child(3) label {
+	margin-left: .25rem;
 }
 
 .hero-cards {
@@ -233,6 +245,7 @@ nav>ul>li:hover {
 	flex-direction: column;
 	align-items: center;
 	transition: all .2s ease-in-out;
+	cursor: pointer;
 }
 
 .hero-cards .card img {
@@ -460,10 +473,11 @@ dialog>div:first-child::after {
 	position: absolute;
 	width: 2px;
 	height: 30px;
-	background-color: black;
+	background-color: var(--blue);
 	top: 0;
 	left: 50%;
 	transform: translateX(-50%);
+	transition: background-color 500ms;
 }
 
 dialog>div:first-child::before {
@@ -476,8 +490,7 @@ dialog>div:first-child::after {
 
 dialog>div:first-child:hover::before,
 dialog>div:first-child:hover::after {
-	background-color: var(--blue);
-	/* Change the color as needed */
+	background-color: var(--darkBlue);
 }
 
 dialog>div:nth-child(2) {
@@ -497,8 +510,8 @@ dialog>div:nth-child(2)>form {
 }
 
 dialog>div:nth-child(2)>form>textarea {
-	min-width: 35vw;
-	min-height: 15vw;
+	min-width: 30vw;
+	min-height: 20vh;
 }
 
 @keyframes fade-in {

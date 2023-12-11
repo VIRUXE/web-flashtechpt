@@ -3,35 +3,36 @@ const whatsappImg = document.createElement('img');
 const emailImg = document.createElement('img');
 
 with (whatsappImg) {
-	src = 'logotipos/whatsapp.png';
-	alt = 'WhatsApp';
-	title = 'Enviar mensagem por WhatsApp'
-	style.width = '50px';
+	src          = 'logotipos/whatsapp.png';
+	alt          = 'WhatsApp';
+	title        = 'Enviar mensagem por WhatsApp'
+	style.width  = '50px';
 	style.height = 'auto';
 }
 
 with (emailImg) {
-	src = 'logotipos/email.png';
-	alt = 'E-Mail';
-	title = 'Preencher contacto de formulário.'
-	style.width = '50px';
-	style.height = 'auto';
+	src              = 'logotipos/email.png';
+	alt              = 'E-Mail';
+	title            = 'Preencher contacto de formulário.'
+	style.width      = '50px';
+	style.height     = 'auto';
 	style.marginLeft = '1rem';
+	style.cursor     = 'pointer';
 }
 
 // Dialog handling
 const dialog = document.getElementsByTagName('dialog')[0];
 
 const serviceMessages = {
-	ficheiros: 'Gostaria de obter um ficheiro',
-	motores: 'Necessito de mais informação sobre reprogramação de motores',
-	caixa_velocidaes: 'Necessito de mais informação sobre reprogramação de caixas de velocidades',
+	ficheiros        : 'Gostaria de obter um ficheiro',
+	motores          : 'Necessito de mais informação sobre reprogramação de motores',
+	caixa_velocidades: 'Necessito de mais informação sobre reprogramação de caixas de velocidades',
 	filtro_particulas: 'Necessito de mais informação sobre filtros de partículas',
-	potencia: 'Necessito de mais informação sobre aumentos de potência',
-	egr: 'Necessito de mais informação sobre EGR',
-	adblue: 'Necessito de mais informação sobre AdBlue',
-	flaps: 'Necessito de mais informação sobre Flaps',
-	catalizadores: 'Necessito de mais informação sobre Catalizadores'
+	potencia         : 'Necessito de mais informação sobre aumentos de potência',
+	egr              : 'Necessito de mais informação sobre EGR',
+	adblue           : 'Necessito de mais informação sobre AdBlue',
+	flaps            : 'Necessito de mais informação sobre Flaps',
+	catalizadores    : 'Necessito de mais informação sobre Catalizadores'
 }
 
 function getGreeting() {
@@ -65,15 +66,19 @@ function createContactLinks(service, type) {
 
 	// Email link
 	let emailLink = document.createElement('a');
-	emailLink.href = 'mailto:example@example.com'; // Placeholder email address
+	// emailLink.href = 'mailto:example@example.com'; // Placeholder email address
 	emailLink.appendChild(emailImg); // Replace with appropriate icons or images as needed
 	emailLink.onclick = function () {
 		// Replace the content of the second div with a contact form
 		dialogContent.innerHTML = `
-		<form action="contact-request.php" method="post">
-		  <input type="email" name="email" placeholder="E-mail" required>
-		  <textarea name="message" placeholder="A sua mensagem..." required>${text}</textarea>
-		  <button type="submit">ENVIAR PEDIDO</button>
+		<form id="contact-request" action="contact-request.php" method="post">
+			<label for="email"><b>O seu E-mail</b>:</label>
+			<input type="email" id="email" name="email" placeholder="nome@exemplo.pt" autocomplete="email" required>
+		
+			<label for="message"><b>Mensagem de Contacto</b>:</label>
+			<textarea id="message" name="message" placeholder="A sua mensagem..." required>${text}</textarea>
+		
+			<button type="submit">ENVIAR PEDIDO</button>
 		</form>
 	  `;
 		return false; // Prevent default link behavior
@@ -84,6 +89,3 @@ function createContactLinks(service, type) {
 	dialogContent.appendChild(whatsappLink);
 	dialogContent.appendChild(emailLink);
 }
-
-// Call the function to create the contact links when the dialog is opened
-createContactLinks('ficheiros');

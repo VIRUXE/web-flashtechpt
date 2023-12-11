@@ -3,6 +3,8 @@
 	https://github.com/VIRUXE
 */
 
+import { GenerateFileServiceOptions } from "./file-service.mjs";
+
 /*
 	We load a random hero image. (50% chance)
 	As we add or remove hero images we adjust the array below, with the image "id". Example: 'hero(id).webp'
@@ -76,3 +78,5 @@ fileService.addEventListener('click', e => {
 
 	fileServiceDetailsPanel.style.display = currDisplay === 'block' ? 'none' : 'block';
 });
+
+GenerateFileServiceOptions();

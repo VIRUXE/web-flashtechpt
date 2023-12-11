@@ -84,83 +84,79 @@
 						Soluções, aumento de potência, diagnóstico, etc...</p>
 					<div style="display: block;">
 						<form>
-							<input type="checkbox" id="option1" name="opcoes1">
-							<label for="option1">Option 1</label><br>
+							<div>
+								<label for="vehicleModel">Modelo do Veículo:</label>
+								<input type="text" id="vehicleModel" name="vehicleModel" placeholder="BMW 335d 2014" minlength="5" maxlength="100" autocomplete="on" required><br>
+							</div>
+							<div>
+								<label for="engineCode">Tipo de Motor:</label>
+								<input type="text" id="engineCode" name="engineCode" placeholder="Código/Cilindrada/Outro" minlength="5"  maxlength="100" autocomplete="on" required><br>
+							</div>
 
-							<input type="checkbox" id="option2" name="opcoes1">
-							<label for="option2">Option 2</label><br>
-					
-							<input type="checkbox" id="option3" name="opcoes1">
-							<label for="option3">Option 3</label><br>
-					
-							<label for="vehicleModel">Modelo do Veículo:</label>
-							<input type="text" id="vehicleModel" name="vehicleModel" placeholder="BMW 335d 2014" minlength="5" maxlength="100" required><br>
-					
-							<label for="engineCode">Tipo de Motor:</label>
-							<input type="text" id="engineCode" name="engineCode" placeholder="Código/Cilindrada/Outro" minlength="5"  maxlength="100" required><br>
-							
+							<div></div>
+
 							<button type="submit">ENVIAR PEDIDO</button>
 						</form>
 						<p style="display: none;"></p>
 					</div>
 				</section>
 				<section class="hero-cards">
-					<a class="card" href="#" title="Pressione para requisitar serviço." onclick="requestContact('motores');">
+					<div class="card" title="Pressione para requisitar serviço." onclick="requestContact('motores');">
 						<img src="icones/002-car.png" alt="Motores" />
 						<h2>Motores</h2>
 						<p>
 							Possuímos das ferramentas necessárias para a reprogramação de motores a Gasolina e Gasóleo, com ganhos de
 							potência, binário e economia.
 						</p>
-					</a>
-					<a class="card" href="#" title="Pressione para requisitar serviço." onclick="requestContact('');">
+					</div>
+					<div class="card" title="Pressione para requisitar serviço." onclick="requestContact('caixa_velocidades');">
 						<img src="icones/001-gearbox.png" alt="Caixas de Velocidades" />
 						<h2>Caixas de Velocidades</h2>
 						<p>
 							A reprogramação de caixas de velocidades automáticas, promove trocas mais rápidas, suaves e a rotações mais adequadas para cada estilo/modo de condução.
 						</p>
-					</a>
-					<a class="card" href="#" title="Pressione para requisitar serviço." onclick="requestContact('');">
+					</div>
+					<div class="card" title="Pressione para requisitar serviço." onclick="requestContact('filtro_particulas');">
 						<img src="icones/minus.png" alt="Filtros de Partículas" />
 						<h2>Filtros de Partículas</h2>
 						<p>
 							Solução de remoção de filtro de partículas (FAP).<br> Mais económico que a sua substituição. Com ganhos de potência, binário e economia.
 						</p>
-					</a>
-					<a class="card" href="#" title="Pressione para requisitar serviço." onclick="requestContact('');">
+					</div>
+					<div class="card" title="Pressione para requisitar serviço." onclick="requestContact('potencia');">
 						<img src="icones/018-chipset.png" alt="Evolução de Potência" />
 						<h2>Evolução de Potência</h2>
 						<p>
 							Tratamos do seu veículo como um projeto e acompanhamos a sua evolução com soluções eletrónicas e conhecimento mecânico.
 						</p>
-					</a>
+					</div>
 				</section>
 				<section class="hero-cards">
-					<a class="card" href="#" title="Pressione para requisitar serviço." onclick="requestContact('');">
+					<div class="card" title="Pressione para requisitar serviço." onclick="requestContact('egr');">
 						<img src="icones/015-limit.png" alt="EGR" />
 						<h2>EGR</h2>
 						<p>
 							A válvula <i>EGR</i>, conhecida como um componente de controlo de emissões, é um dispositivo que recircula uma parte dos gases de escape do motor para o colector de admissão, como tal é um componente bastante propício a falhar.
 						</p>
 						<p>A solução com o maior custo/benefício é a sua remoção fisíca e eletrónicamente.</p>
-					</a>
-					<a class="card" href="#" title="Pressione para requisitar serviço." onclick="requestContact('');">
+					</div>
+					<div class="card" title="Pressione para requisitar serviço." onclick="requestContact('adblue');">
 						<img src="icones/kerosene.png" alt="AdBlue" />
 						<h2>AdBlue</h2>
 						<p>
 							O <i>AdBlue</i> também conhecido como <i>Urea</i>, é um líquido que é injetado no sistema de escape do motor para reduzir as emissões de óxido de nitrogénio (NOx).
 						</p>
 						<p>Derivado á sua composição é também um componente propício a falhas, sendo a sua remoção física e eletrónica a solução mais económica.</p>
-					</a>
-					<a class="card" href="#" title="Pressione para requisitar serviço." onclick="requestContact('');">
+					</div>
+					<div class="card" title="Pressione para requisitar serviço." onclick="requestContact('flaps');">
 						<img src="icones/maintenance.png" alt="Flaps" />
 						<h2>Flaps</h2>
 						<p>
 							Os <i>Flaps</i> são borboletas colocadas no colector de admissão do motor, que abrem e fecham de acordo com a necessidade de ar do motor.
 						</p>
 						<p>Para além de serem responsáveis por restringir o fluxo de ar, em certos motores antigos, podem ser um ponto de falha, sendo que a sua remoção física e eletrónica promove uma melhoria de desempenho e economia, como também deixa de ser um ponto de falha.</p>
-					</a>
-					<a class="card" href="#" title="Pressione para requisitar serviço." onclick="requestContact('');">
+					</div>
+					<div class="card" title="Pressione para requisitar serviço." onclick="requestContact('catalizadores');">
 						<img src="icones/exhaust-pipe.png" alt="Catalizadores" />
 						<h2>Catalizadores</h2>
 						<p>
@@ -168,7 +164,7 @@
 						</p>
 						<p>A sua remoção física e eletrónica promove uma melhoria de desempenho e economia.</p>
 						<p>Igualmente nestes casos a anulação do sensor de gases de escape é uma solução.</p>
-					</a>
+					</div>
 				</section>
 			</div>
 		</div>
@@ -215,11 +211,11 @@
 		<a id="whatsapp" target="_blank" href="https://wa.me/351919742986?text=Olá. Necessito de mais informação sobre os vossos serviços." title="Enviar mensagem pelo WhatsApp"><i class="fi fi-brands-whatsapp"></i></a>
 
 		<dialog>
-			<div onclick="this.parentElement.close();"></div>
+			<div title="Cancelar" onclick="this.parentElement.close();"></div>
 			<div></div>
 		</dialog>
 
-		<script src="script/script.js"></script>
+		<script type="module" src="script/main.js"></script>
 		<script src="script/contact.js"></script>
 	</body>
 </html>
