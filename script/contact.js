@@ -20,9 +20,6 @@ with (emailImg) {
 	style.cursor     = 'pointer';
 }
 
-// Dialog handling
-const dialog = document.getElementsByTagName('dialog')[0];
-
 const serviceMessages = {
 	ficheiros        : 'Gostaria de obter um ficheiro',
 	motores          : 'Necessito de mais informação sobre reprogramação de motores',
@@ -49,18 +46,19 @@ function getGreeting() {
 function requestContact(service, data) {
 	if(!Object.keys(serviceMessages).includes(service)) return;
 
-	createContactLinks(service);
-	dialog.showModal();
-}
-
-// Function to create the WhatsApp and Email links
-function createContactLinks(service, type) {
 	let dialogContent = document.querySelector('dialog > div:nth-child(2)');
-	const text = `${getGreeting()}. ${serviceMessages[service]}`;
+	let text = `${getGreeting()}. ${serviceMessages[service]}.`;
+
+	// Add extra details to the contact text if they're requesting a file service
+	if(service === 'ficheiros') {
+		text += `\n\nModelo de Veículo: ${data.vehicleModel}` +
+				`\nTipo de Motor: ${data.engineCode}` +
+				`\n\nOpções Selecionadas: ${data.options.join(', ')}`;
+	}	
 
 	// WhatsApp link
 	let whatsappLink = document.createElement('a');
-	whatsappLink.href = `${whatsappBaseUrl}?text=${text}.`;
+	whatsappLink.href = `${whatsappBaseUrl}?text=${encodeURIComponent(text)}`;
 	whatsappLink.appendChild(whatsappImg); // Replace with appropriate icons or images as needed
 	whatsappLink.target = '_blank'; // Ensures the link opens in a new tab or window
 
@@ -72,13 +70,18 @@ function createContactLinks(service, type) {
 		// Replace the content of the second div with a contact form
 		dialogContent.innerHTML = `
 		<form id="contact-request" action="contact-request.php" method="post">
-			<label for="email"><b>O seu E-mail</b>:</label>
-			<input type="email" id="email" name="email" placeholder="nome@exemplo.pt" autocomplete="email" required>
+			<div>
+				<label for="email"><b>E-mail</b>:</label>
+				<input type="email" id="email" name="email" placeholder="nome@exemplo.pt" autocomplete="email" required>
+				<label for="tel"><b>Telemóvel</b>:</label>
+				<input type="tel" id="tel" name="tel" placeholder="912999999" autocomplete="tel" required>
+	
+			</div>
 		
 			<label for="message"><b>Mensagem de Contacto</b>:</label>
 			<textarea id="message" name="message" placeholder="A sua mensagem..." required>${text}</textarea>
 		
-			<button type="submit">ENVIAR PEDIDO</button>
+			<button type="submit">ENVIAR</button>
 		</form>
 	  `;
 		return false; // Prevent default link behavior
@@ -88,4 +91,6 @@ function createContactLinks(service, type) {
 	dialogContent.innerHTML = ''; // Clear the existing content
 	dialogContent.appendChild(whatsappLink);
 	dialogContent.appendChild(emailLink);
+
+	document.getElementsByTagName('dialog')[0].showModal();
 }

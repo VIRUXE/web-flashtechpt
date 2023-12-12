@@ -26,14 +26,16 @@ const options = {
 	'tva'                      : 'TVA',
 	'stage1'                   : 'Stage1',
 	'stage1+'                  : 'Stage1+',
-	'popcorn-hardcut'       : 'PopCorn - Hardcaut',
-	'pops-bangs'                : 'Popsbangs',
+	'popcorn-hardcut'          : 'PopCorn - Hardcaut',
+	'pops-bangs'               : 'Popsbangs',
 	'launch-control-activation': 'Launch Control Activation',
 	'fca-unlock'               : 'FCA Unlock',
 	'golf-farts'               : 'Farts (Golf)'
 }
 
-export function GenerateFileServiceOptions() {
+export const getOptionDescription = optionKey => options[optionKey];
+
+export function renderOptions() {
 	const optionsContainer = document.querySelector('#fileservice div > form > div:nth-child(3)');
 
 	Object.entries(options).forEach(([optionSlug, optionText]) => {
