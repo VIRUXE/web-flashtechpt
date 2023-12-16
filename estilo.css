@@ -199,19 +199,14 @@ nav>ul>li:hover {
 	padding: 1rem .5rem;
 }
 
-#fileservice div:hover {
-	cursor: default;
-}
+#fileservice div:hover { cursor: default; }
 
 #fileservice img {
 	height: 64px;
 	filter: invert(78%) sepia(42%) saturate(7483%) hue-rotate(162deg) brightness(100%) contrast(103%) drop-shadow(0 0 10px var(--blue));
-
 }
 
-#fileservice:hover {
-	cursor: pointer;
-}
+#fileservice:hover { cursor: pointer; }
 
 #fileservice > div > form > div {
 	margin: 1rem 0;
@@ -222,9 +217,9 @@ nav>ul>li:hover {
 	justify-content: center;
 }
 
-#fileservice div > form > div:nth-child(3) label {
-	margin-left: .25rem;
-}
+#fileservice div > form > div:nth-child(3) label { 	margin-left: .25rem; }
+
+#message { 	width: 100%; }
 
 .hero-cards {
 	display: flex;
@@ -300,9 +295,7 @@ nav>ul>li:hover {
 	justify-content: center;
 }
 
-#company-info .container>div>h2 {
-	margin: 1rem 0 0 0;
-}
+#company-info .container>div>h2 { margin: 1rem 0 0 0; }
 
 footer {
 	padding: 1rem;
@@ -319,9 +312,7 @@ footer>.container>div i {
 }
 
 /* Remove margin from the last child */
-footer>.container>div:last-child {
-	margin-bottom: 0;
-}
+footer>.container>div:last-child { margin-bottom: 0; }
 
 #whatsapp {
 	/* WhatsApp Green */
@@ -342,29 +333,13 @@ footer>.container>div:last-child {
 	filter: drop-shadow(0 0 10px #25d366);
 }
 
-@keyframes grow {
-	from {
-		transform: scale(1);
-	}
-
-	to {
-		transform: scale(1.1);
-	}
-}
-
 /* Rules for bigger screens */
 @media (min-width: 768px) {
-	#header {
-		padding-bottom: 1rem;
-	}
+	#header { padding-bottom: 1rem; }
 
-	#logo {
-		max-width: 15rem;
-	}
+	#logo { max-width: 15rem; }
 
-	nav {
-		display: flex;
-	}
+	nav { display: flex; }
 
 	#hero {
 		height: 20rem;
@@ -372,48 +347,31 @@ footer>.container>div:last-child {
 		border: 2px solid var(--blue);
 	}
 
-	#hero>h1 {
-		font-size: 2.7rem;
-	}
+	#hero>h1 { font-size: 2.7rem; }
 
 	#hero-text {
 		margin-left: 10rem;
 		font-size: 20rem;
 	}
 
-	#fileservice {
-		/* margin-top: 1rem; */
-		margin: 2rem 15rem 1rem;
-	}
+	#fileservice { margin: 2rem 15rem 1rem; }
 
-	.hero-cards {
-		flex-wrap: nowrap;
-	}
+	.hero-cards { flex-wrap: nowrap; }
 
-	.hero-cards .card {
-		max-width: 20%;
-	}
+	.hero-cards .card { max-width: 20%; }
 
-	.hero-cards .card:first-child {
-		margin-left: 0;
-	}
+	.hero-cards .card:first-child { margin-left: 0; }
 
-	.hero-cards .card:last-child {
-		margin-right: 0;
-	}
+	.hero-cards .card:last-child { margin-right: 0; }
 
 	#company-info .container {
 		flex-wrap: nowrap;
 		flex-direction: row;
 	}
 
-	#company-info .container>div {
-		padding: 1rem 1rem;
-	}
+	#company-info .container>div { padding: 1rem 1rem; }
 
-	dialog {
-		max-width: 50vw;
-	}
+	dialog { max-width: 50vw; }
 }
 
 dialog {
@@ -514,32 +472,36 @@ dialog>div:nth-child(2)>form>textarea {
 	min-height: 20vh;
 }
 
-@keyframes fade-in {
-	0% {
-		opacity: 0;
-	}
+.loader {
+	border: 8px solid #f3f3f3; /* Fundo */
+	border-top: 8px solid var(--blue);
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	animation: spin 2s linear infinite;
+}
 
-	100% {
-		opacity: 1;
-	}
+@keyframes fade-in {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
 }
 
 @keyframes fade-out {
-	0% {
-		opacity: 1;
-	}
-
-	100% {
-		opacity: 0;
-	}
+	0% { opacity: 1; }
+	100% { opacity: 0; }
 }
 
 @keyframes slide-up {
-	0% {
-		transform: translateY(100%);
-	}
+	0% { transform: translateY(100%); }
+	100% { transform: translateY(0%); }
+}
 
-	100% {
-		transform: translateY(0%);
-	}
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+@keyframes grow {
+	from { transform: scale(1); }
+	to { transform: scale(1.1); }
 }

@@ -78,5 +78,4 @@ fileService.addEventListener('click', e => {
     fileServiceDetailsPanel.style.display = fileServiceDetailsPanel.style.display === 'block' ? 'none' : 'block';
 });
 
-
 renderFileServiceOptions();

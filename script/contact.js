@@ -1,6 +1,9 @@
-const whatsappBaseUrl = 'https://wa.me/351919742986';
-const whatsappImg = document.createElement('img');
-const emailImg = document.createElement('img');
+const whatsappBaseUrl       = 'https://wa.me/351919742986';
+const whatsappImg           = document.createElement('img');
+const emailImg              = document.createElement('img');
+const contactRequestForm    = document.createElement('form');
+
+contactRequestForm.id = 'contact-request';
 
 with (whatsappImg) {
 	src          = 'logotipos/whatsapp.png';
@@ -44,17 +47,18 @@ function getGreeting() {
 }
 
 function requestContact(service, data) {
-	if(!Object.keys(serviceMessages).includes(service)) return;
+	if (!Object.keys(serviceMessages).includes(service)) return;
 
-	let dialogContent = document.querySelector('dialog > div:nth-child(2)');
+	const dialogContent = document.querySelector('dialog > div:nth-child(2)');
 	let text = `${getGreeting()}. ${serviceMessages[service]}.`;
 
 	// Add extra details to the contact text if they're requesting a file service
-	if(service === 'ficheiros') {
-		text += `\n\nModelo de Veículo: ${data.vehicleModel}` +
-				`\nTipo de Motor: ${data.engineCode}` +
-				`\n\nOpções Selecionadas: ${data.options.join(', ')}`;
-	}	
+	if (service === 'ficheiros') {
+		text += 
+			`\n\nModelo de Veículo: ${data.vehicleModel}` +
+			`\nTipo de Motor: ${data.engineCode}` +
+			`\n\nOpções Selecionadas: ${data.options.join(', ')}`;
+	}
 
 	// WhatsApp link
 	let whatsappLink = document.createElement('a');
@@ -64,26 +68,77 @@ function requestContact(service, data) {
 
 	// Email link
 	let emailLink = document.createElement('a');
-	// emailLink.href = 'mailto:example@example.com'; // Placeholder email address
 	emailLink.appendChild(emailImg); // Replace with appropriate icons or images as needed
 	emailLink.onclick = function () {
-		// Replace the content of the second div with a contact form
-		dialogContent.innerHTML = `
-		<form id="contact-request" action="contact-request.php" method="post">
-			<div>
-				<label for="email"><b>E-mail</b>:</label>
-				<input type="email" id="email" name="email" placeholder="nome@exemplo.pt" autocomplete="email" required>
-				<label for="tel"><b>Telemóvel</b>:</label>
-				<input type="tel" id="tel" name="tel" placeholder="912999999" autocomplete="tel" required>
-	
-			</div>
-		
-			<label for="message"><b>Mensagem de Contacto</b>:</label>
-			<textarea id="message" name="message" placeholder="A sua mensagem..." required>${text}</textarea>
-		
-			<button type="submit">ENVIAR</button>
-		</form>
-	  `;
+		// Clear existing content
+		dialogContent.innerHTML      = '';
+		contactRequestForm.innerHTML = '';
+
+		// Create email input
+		const emailLabel           = document.createElement('label');
+		      emailLabel.htmlFor   = 'email';
+		      emailLabel.innerHTML = '<b>E-mail</b>: ';
+
+		const emailInput              = document.createElement('input');
+		      emailInput.type         = 'email';
+		      emailInput.id           = 'email';
+		      emailInput.name         = 'email';
+		      emailInput.placeholder  = 'nome@exemplo.pt';
+		      emailInput.autocomplete = 'email';
+		      emailInput.required     = true;
+
+		const emailDiv = document.createElement('div');
+		emailDiv.appendChild(emailLabel);
+		emailDiv.appendChild(emailInput);
+
+		// Create tel input
+		const telLabel              = document.createElement('label');
+		      telLabel.htmlFor      = 'tel';
+		      telLabel.innerHTML    = '<b>Telemóvel</b>: ';
+		const telInput              = document.createElement('input');
+		      telInput.type         = 'tel';
+		      telInput.id           = 'tel';
+		      telInput.name         = 'tel';
+		      telInput.placeholder  = '912999999';
+		      telInput.autocomplete = 'tel';
+		      telInput.required     = true;
+
+		// Append tel elements to div
+		const telDiv = document.createElement('div');
+		telDiv.appendChild(telLabel);
+		telDiv.appendChild(telInput);
+
+		// Create textarea for message
+		const messageLabel             = document.createElement('label');
+		      messageLabel.htmlFor     = 'message';
+		      messageLabel.innerHTML   = '<b>Mensagem de Contacto</b>:';
+		const messageInput             = document.createElement('textarea');
+		      messageInput.id          = 'message';
+		      messageInput.name        = 'message';
+		      messageInput.placeholder = 'A sua mensagem...';
+		      messageInput.required    = true;
+		      messageInput.value       = text;
+
+		const responseMessage = document.createElement('div');
+		responseMessage.id = 'response-message';
+
+		// Create submit button
+		const submitButton             = document.createElement('button');
+		      submitButton.type        = 'submit';
+		      submitButton.textContent = 'ENVIAR';
+		      submitButton.onclick     = submitForm;
+
+		// Append elements to form
+		contactRequestForm.appendChild(emailDiv);
+		contactRequestForm.appendChild(telDiv);
+		contactRequestForm.appendChild(messageLabel);
+		contactRequestForm.appendChild(messageInput);
+		contactRequestForm.appendChild(responseMessage);
+		contactRequestForm.appendChild(submitButton);
+
+		// Append form and other elements to dialogContent
+		dialogContent.appendChild(contactRequestForm);
+
 		return false; // Prevent default link behavior
 	};
 
@@ -94,3 +149,48 @@ function requestContact(service, data) {
 
 	document.getElementsByTagName('dialog')[0].showModal();
 }
+
+function submitForm(event) {
+	event.preventDefault();
+
+	const responseElement = document.getElementById('response-message');
+
+	const lastSubmissionTime = localStorage.getItem('lastSubmissionTime');
+    const currentTime = new Date().getTime();
+
+    // Check if the form was submitted less than a certain time ago
+    if (lastSubmissionTime && currentTime - lastSubmissionTime < 60000) { // 30 seconds threshold
+        responseElement.textContent = 'Por favor, aguarde antes de enviar outro pedido.';
+        return;
+    }
+	
+	// Show the spinner first
+	responseElement.innerHTML = `<div class="loader"></div>`;
+
+	setTimeout(() => { // Yes a timeout...
+		fetch('contact-request.php', {
+			method: 'POST',
+			body: new FormData(contactRequestForm),
+		})
+		.then(response => {
+			if (!response.ok) {
+				switch(response.status) {
+					case 400:
+						throw new Error('Erro no pedido. Por favor, verifique os dados que forneceu.'); // Bad Request
+					case 500:
+						throw new Error('Erro interno do servidor. Por favor, tente novamente mais tarde.'); // Server Error
+					default:
+						throw new Error('Problema de Rede. Tente mais tarde.');
+				}
+			}		
+		})
+		.then(() => {
+			responseElement.textContent = 'Pedido enviado com sucesso!'
+			localStorage.setItem('lastSubmissionTime', currentTime); // Update last submission time
+		})
+		.catch(error => {
+			responseElement.textContent = error.message;
+			console.log(error.message);
+		});
+	}, Math.random() * 1001); // Don't judge me ok?
+};
